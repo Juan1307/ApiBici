@@ -5,7 +5,7 @@
     }
   },
   "redirects":[
-    { "source":"/stations" , "destination":"/src/index.ts" }
-    { "source":"/test" , "destination":"/src/data" }
+    { "source":"/stations", "destination":"/src/index.ts" },
+    { "source":"/test", "destination":"/src/data" }
   ]
 }
