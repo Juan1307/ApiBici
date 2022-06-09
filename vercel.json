@@ -1,9 +1,4 @@
 {
-  "functions":{
-    "src/index.ts":{
-      "memory": 1024 
-    }
-  },
   "redirects":[
     { "source":"/stations", "destination":"/src/index.ts" },
     { "source":"/test", "destination":"/src/data" }
