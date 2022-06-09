@@ -1,7 +1,4 @@
 {
-  "builds":{
-
-  },
   "redirects":[
     { "source":"/stations", "destination":"/api/index.ts" },
     { "source":"/test", "destination":"/api/data" }
