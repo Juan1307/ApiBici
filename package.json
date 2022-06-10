@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite-node src/index.ts"
+    "dev": "vite-node api/connect/DbConnect.ts",
+    "sub-dev": "vite-node api/index.ts"
   },
   "keywords": [],
   "author": "Antik",
   "license": "ISC",
   "dependencies": {
     "@fastify/postgres": "^5.0.0",
+    "@types/pg": "^8.6.5",
     "fastify": "^4.0.0",
     "pg": "^8.7.3"
   },
