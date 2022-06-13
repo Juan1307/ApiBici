@@ -4,10 +4,12 @@ import { CoordinatesType, ArrayLocationsType, ArrayDistanceLocationsType } from 
 import { JSON_DATA } from './../services/_Srv.data';
 
 import type { SrvEngineType } from './EntContainer';
+import { SrvDefault, SrvGoogle, SrvLibrary  } from './EntContainer';
 
 export interface EntDependencyInterface {
-  getDistanceDefault: () => Promise<ArrayDistanceLocationsType[]>,
-  // getDistanceGoogle: () => string[],
+  getDistanceDefault: () => ArrayDistanceLocationsType[],
+  getDistanceLibrary: () => ArrayDistanceLocationsType[],
+  getDistanceGoogle: () => ArrayDistanceLocationsType[]
 }
 
 class Stations {
@@ -23,24 +25,34 @@ class Stations {
 
 class EntDependency extends Stations implements EntDependencyInterface {
 
-  private instance: SrvEngineType; 
+  protected currentStations: ArrayLocationsType[] = [];
+  private instance: SrvEngineType | any; // oops any dont here, but ts-heck dont read typeof class
   private data: CoordinatesType;
-  
-  constructor(instance: SrvEngineType, data: CoordinatesType) {
+
+  constructor (instance: SrvEngineType, data: CoordinatesType) {
     super();
     this.instance = instance; //set dinamyc class
     this.data = data;
   }
-  
-  // public async getDistanceGoogle(){
-  //   return ['hi from google service']; 
-  // }
 
-  public async getDistanceDefault() {
-    const currentSrv = new this.instance(this.data); //pass to instance
-    const currentStations = await this.getStationsFromDatabase();
+  public async getStationsFromAdapter(adapter = false) {
+    this.currentStations = (adapter) ? await this.getStationsFromDatabase():
+                                       await this.getStationsFromJson();
+  }
 
-    return currentSrv.getDistanceEntry(currentStations);
+  public getDistanceDefault() {
+    const currentSrv: SrvDefault = new this.instance(this.data); //by SrvDefault.ts
+    return currentSrv.getDistanceEntry(this.currentStations);
+  }
+
+  public getDistanceLibrary() {
+    const currentSrv: SrvLibrary = new this.instance(this.data); //by SrvLibrary.ts
+    return currentSrv.getDistanceEntry(this.currentStations);
+  }
+
+  public getDistanceGoogle(){
+    const currentSrv: SrvGoogle = new this.instance(this.data); //by SrvGoogle.ts
+    return currentSrv.getDistanceEntry(this.currentStations);
   }
 }
 

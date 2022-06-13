@@ -2,22 +2,25 @@
   "name": "bici-api",
   "version": "1.0.0",
   "description": "Api bici",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite-node api/connect/DbConnect.ts",
+    "dev": "vite-node api/services/SrvGoogle.ts",
     "sub-dev": "vite-node api/index.ts"
   },
   "keywords": [],
   "author": "Antik",
   "license": "ISC",
   "dependencies": {
-    "@fastify/postgres": "^5.0.0",
-    "@types/pg": "^8.6.5",
     "fastify": "^4.0.0",
+    "haversine-distance": "^1.2.1",
+    "node-geometry-library": "^1.2.6",
     "pg": "^8.7.3"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.49.2",
+    "@types/pg": "^8.6.5",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "@vercel/node": "^2.1.0",

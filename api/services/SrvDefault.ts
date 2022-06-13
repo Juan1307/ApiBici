@@ -1,7 +1,8 @@
-import { CoordinatesType, ArrayLocationsType } from './_Srv.types';
+import { CoordinatesType, ArrayLocationsType, ArrayDistanceLocationsType } from './_Srv.types';
+import { checkIfTheSameCoordinates, checkIfTheExactDistance } from './SrvUtils';
 
 class SrvDefault {
-  public exact: boolean = false;
+  public exact = false;
 
   private lat: number;
   private lng: number;
@@ -39,28 +40,27 @@ class SrvDefault {
     return this.exact ? radioDistance : round(radioDistance) ; //pass exact or round value
   }
 
-  public getDistanceEntry(data: ArrayLocationsType[]) {
+  public getDistanceEntry(data: ArrayLocationsType[]): ArrayDistanceLocationsType[] {
 
     const staticRadio = this.checkRadiansByLatitude(this.lat); //ref to current this
     const arrayDistancies = [];
 
     for(let i = 0; data.length > i; i++) {
       const variableData = data[i];
-      const { latitude: provLat, longitude: provLng } = variableData;
+      const { latitude, longitude } = variableData;
+      if(checkIfTheSameCoordinates(variableData, this.lat, this.lng)) continue; // if same coordinates
 
-      // check if the same coordinates
-      if(provLat === this.lat && provLng === this.lng)
-        continue;
-
-      const currentTheta = this.lng - provLng;
-      const currentRadio = this.checkRadiansByLatitude(provLat);
+      // ordenate coordenates
+      const currentTheta = this.lng - longitude;
+      const currentRadio = this.checkRadiansByLatitude(latitude);
       const currentRadioTheta = this.checkRadiansByLatitude(currentTheta);
 
       const currentRadioDistance = this.calculateDistanceByRadios(staticRadio, currentRadio, currentRadioTheta);
       const currentDistance = this.calculateDistance(currentRadioDistance);
 
-      if(currentDistance <= this.distance) 
+      if(checkIfTheExactDistance(currentDistance, this.distance)){
         arrayDistancies.push({ ...variableData, distance: currentDistance });
+      }
     }
 
     return arrayDistancies;
@@ -69,9 +69,3 @@ class SrvDefault {
 }
 
 export default SrvDefault
-
-/*const data = { n_latitude: 20.666378, n_longitude: -103.34882, n_distance: 275 };
-const area = new SrvDefault(data); 
-      // area.exact = true;
-      area.getDistanceEntry(arrayData);
-*/

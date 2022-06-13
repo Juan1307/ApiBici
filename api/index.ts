@@ -11,26 +11,22 @@ export default async (request: VercelRequest, response: VercelResponse) => {
           engine = 'default' } = request.query; //default values 
   
   if(checkPrmIsNumber(latitude, longitude, distance) || checkPrmIsString(engine)){
-    response.status(400).send('Bad request: 400 - check the URL_API values');
+    response.status(400).send('Bad request: 400 - Please Check the URL API values');
   } 
 
   const n_latitude = setTypeNumber(latitude),
         n_longitude = setTypeNumber(longitude),
         n_distance = setTypeNumber(distance),
-        d_engine: string = String(engine);
+        d_engine = String(engine);
 
   const data: CoordinatesType = { n_latitude, n_longitude, n_distance };
 
   //set engine resource by strategy
   const [ currentResource, currentMethod ] = EntContainer[d_engine];
   const currentInstance = new EntDependency(currentResource, data); //pass class and data 
-  const result = await currentInstance[currentMethod](); //pass data to dinamyc function 
+  await currentInstance.getStationsFromAdapter(true); //you can config to db or json true = bd , false = json
 
-  response.status(200).json({
-    body: result,
-    query: request.query,
-    cookies: request.cookies 
-  })
+  const result = currentInstance[currentMethod](); //execute dinamyc function
 
-  // response.status(200).send(`Hello from ${latitude + longitude + distance}!`);
+  response.status(200).json({ body: result });
 };
