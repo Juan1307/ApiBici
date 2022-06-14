@@ -24,9 +24,9 @@ export default async (request: VercelRequest, response: VercelResponse) => {
   //set engine resource by strategy
   const [ currentResource, currentMethod ] = EntContainer[d_engine];
   const currentInstance = new EntDependency(currentResource, data); //pass class and data 
-  await currentInstance.getStationsFromAdapter(true); //you can config to db or json true = bd , false = json
+  await currentInstance.getStationsFromAdapter(); //you can config to db or json true = bd , false = json
 
   const result = currentInstance[currentMethod](); //execute dinamyc function
 
-  response.status(200).json({ body: result });
+  response.status(200).json({ data: result, total: result.length, engine: d_engine });
 };

@@ -1,7 +1,8 @@
 {
     "env": {
         "es2021": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
@@ -16,5 +17,6 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/no-var-requires": "warn"
     }
 }

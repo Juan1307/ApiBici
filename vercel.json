@@ -1,6 +1,6 @@
 {
   "redirects":[
-    { "source":"/stations", "destination":"/api/index" },
-    { "source":"/test", "destination":"/api/data" }
+    { "source":"/stations", "destination":"/api/stations" },
+    { "source":"/demo", "destination":"/demo" }
   ]
 }

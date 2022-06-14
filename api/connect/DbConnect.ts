@@ -1,8 +1,6 @@
 import { Client } from 'pg';
 
-const client = new Client({
-  connectionString: 'postgres://isevzwhx:xzdTSQrsKSVPgUJVHMuCrT6kAhUw8w_1@kesavan.db.elephantsql.com/isevzwhx' 
-});
+const client = new Client({ connectionString: process.env.CLIENT_PG_URL });
 
 client.connect();
 
