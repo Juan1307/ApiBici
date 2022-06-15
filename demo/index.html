@@ -15,9 +15,10 @@
       
       <section class="cols-span-1 flex flex-col space-y-3">
         <p>Esta es una interfaz de prueba para Bici-Api con el proposito de renderizar los datos proveidos por dicha api.</p>
-
-        <p>Total: {{ stations.total }} </p>
-        <p>Engine: {{ stations.engine }} </p>
+        <p>Para mas información:
+          <a class="text-blue-600" href="https://github.com/Juan1307/ApiBici" target="_blank">+ BICI-API</a></p>
+        <p>Total: <span v-text="stations.total"></span> </p>
+        <p>Engine: <span v-text="stations.engine"></span> </p>
 
       </section>
 

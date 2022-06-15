@@ -6,8 +6,7 @@
   "scripts": {
     "test-con": "jest -t connect",
     "test-api": "jest -t bici-api",
-    "script": "vite-node api/",
-    "demo": "vite-node demo/",
+    "script": "vite-node api/connect/file.ts",
     "start": "npx vercel dev"
   },
   "keywords": [],
