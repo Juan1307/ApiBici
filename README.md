@@ -29,7 +29,7 @@ curl -v "https://api-bici.vercel.app/api/stations?latitude=20.666378&longitude=-
 npm i // para las dependencias
 npm run start //inicia modo desarrollo
 ```
-- En **.env** puedes poner tu base de datos de postgresql, a través de una url de conexión si usas un servicio en la nube de psg-sql [+info]('https://node-postgres.com/').
+- En **.env** puedes poner tu base de datos de postgresql, a través de una url de conexión si usas un servicio en la nube de psg-sql.
 
 - Para ejecutar los test hay 2 comandos
 ```

@@ -36,7 +36,7 @@ import TheList from './components/TheList.js';
 
       async function callApiStations(data) {
         const { latitude, longitude, distance } = data;
-
+        //api url
         const response = await fetch(`https://api-bici.vercel.app/api/stations?latitude=${latitude}&longitude=${longitude}&distance=${distance}`);
         const responseData = await response.json();
               stations.value = responseData;
