@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo BICI-API</title>
+</head>
+<body class="my-10 mx-3 md:mx-8 xl:mx-14 ">
+  
+  <header class="text-center mb-6">
+    <h1 class="text-gray-600 text-4xl font-bold">BICI - API</h1>    
+  </header>
+  <main id="root">
+    <section class="grid grid-cols md:grid-cols-2 gap-4 items-center">  
+      
+      <section class="cols-span-1 flex flex-col space-y-3">
+        <p>Esta es una interfaz de prueba para Bici-Api con el proposito de renderizar los datos proveidos por dicha api.</p>
+
+        <p>Total: {{ stations.total }} </p>
+        <p>Engine: {{ stations.engine }} </p>
+
+      </section>
+
+      <section class="cols-span-1">
+        <form @submit.prevent="sendDataToApi">
+
+          <!-- form inputs -->
+          <div class="grid grid-cols sm:grid-cols-2 xl:grid-cols-3 gap-2 mb-2">
+            <div class="flex flex-col">
+              <label for="latitude">Latitud</label>
+              <input type="text" name="latitude" id="latitude" class="p-1 border rounded text-center bg-gray-100 transition-colors focus:outline-none focus:bg-white" placeholder="Ingrese valor">
+              <error-text :error="latitude"/>
+            </div>
+            <div class="flex flex-col">
+              <label for="longitude">Longitud</label>
+              <input type="text" name="longitude" id="longitude" class="p-1 border rounded text-center bg-gray-100 transition-colors focus:outline-none focus:bg-white" placeholder="Ingrese valor">
+              <error-text :error="longitude"/>
+            </div>
+            <div class="flex flex-col">
+              <label for="distance">Distancia</label>
+              <input type="text" name="distance" id="distance" class="p-1 border rounded text-center bg-gray-100 transition-colors focus:outline-none focus:bg-white" placeholder="Ingrese valor">
+              <error-text :error="distance"/>
+            </div>
+          </div>
+
+          <!-- button submit -->
+          <div class="flex justify-center">
+            <button type="submit" :disabled="disabled" class="w-full sm:w-1/2 px-2 py-1 border rounded bg-blue-400 text-white flex justify-center items-center transition-colors hover:bg-blue-600">
+              <svg :class="{'animate-spin mr-2 h-5 w-5 text-white': disabled,
+                            'hidden': !disabled }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+             Buscar estación
+           </button>
+          </div>
+        </form>
+      </section>
+
+    </section>
+
+    <hr class="my-4" />
+    
+    <!-- Render list sations  -->
+    <List :data="stations.data" />
+  
+  </main>
+
+  <script defer src="https://cdn.tailwindcss.com"></script>
+  <script defer type="importmap">
+    {
+    "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

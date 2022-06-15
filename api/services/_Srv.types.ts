@@ -18,3 +18,8 @@ export interface CoordinatesType {
   n_longitude: number,
   n_distance: number
 } 
+
+export interface CoordinateType {
+ lat: number, 
+ lng: number
+}

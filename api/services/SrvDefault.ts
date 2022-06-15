@@ -47,7 +47,7 @@ class SrvDefault {
 
     for(let i = 0; data.length > i; i++) {
       const variableData = data[i];
-      const { latitude, longitude } = variableData;
+      const { latitude, longitude, status } = variableData;
       if(checkIfTheSameCoordinates(variableData, this.lat, this.lng)) continue; // if same coordinates
 
       // ordenate coordenates
@@ -58,7 +58,7 @@ class SrvDefault {
       const currentRadioDistance = this.calculateDistanceByRadios(staticRadio, currentRadio, currentRadioTheta);
       const currentDistance = this.calculateDistance(currentRadioDistance);
 
-      if(checkIfTheExactDistance(currentDistance, this.distance)){
+      if(checkIfTheExactDistance(currentDistance, this.distance, status)){
         arrayDistancies.push({ ...variableData, distance: currentDistance });
       }
     }

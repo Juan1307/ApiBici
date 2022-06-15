@@ -1,10 +1,10 @@
 import { SphericalUtil } from 'node-geometry-library'; //library with google geometry library
 
-import { CoordinatesType, ArrayLocationsType, ArrayDistanceLocationsType } from './_Srv.types';
+import { CoordinatesType, CoordinateType, ArrayLocationsType, ArrayDistanceLocationsType } from './_Srv.types';
 import { checkIfTheSameCoordinates, checkIfTheExactDistance } from './SrvUtils';
 
 class SrvGoogle {
-  private pointerOne: { lat: number, lng: number }; //infered
+  private pointerOne: CoordinateType; //infered
   private distance: number;  
 
   constructor({ n_latitude, n_longitude, n_distance }: CoordinatesType) {
@@ -18,12 +18,12 @@ class SrvGoogle {
 
     for(let i = 0; data.length > i; i++) {
       const variableData = data[i];
-      const { latitude, longitude } = variableData;
+      const { latitude, longitude, status } = variableData;
 
       if(checkIfTheSameCoordinates(variableData, lat, lng)) continue;
       const currentDistance = SphericalUtil.computeDistanceBetween(this.pointerOne, { lat: latitude, lng: longitude }); 
 
-      if(checkIfTheExactDistance(currentDistance, this.distance)){
+      if(checkIfTheExactDistance(currentDistance, this.distance, status)){
         arrayDistancies.push({ ...variableData, distance: currentDistance });
       }
     }

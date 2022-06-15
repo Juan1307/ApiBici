@@ -14,9 +14,7 @@
   "author": "Antik",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^4.0.0",
     "haversine-distance": "^1.2.1",
-    "node-fetch": "^3.2.6",
     "node-geometry-library": "^1.2.6",
     "pg": "^8.7.3"
   },
